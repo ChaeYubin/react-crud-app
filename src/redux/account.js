@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  list: [{ id: 0, title: "샘플", amount: 1500 }],
+  total: 1500,
+};
+
 export const accountSlice = createSlice({
   name: "account",
-  initialState: { list: [{ id: 0, title: "밥먹기", amount: 1200 }], total: 0 },
+  initialState: initialState,
   reducers: {
     add: (state, action) => {
       state.list.push(action.payload.item);
-      state.total += action.payload.amount;
+      state.total += action.payload.item.amount;
     },
     remove: (state, action) => {
       state.list = state.list.filter(
@@ -26,8 +31,7 @@ export const accountSlice = createSlice({
       });
     },
     clear: (state) => {
-      state.list = [];
-      state.total = 0;
+      state = initialState;
     },
   },
 });
