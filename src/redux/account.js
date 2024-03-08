@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  list: [{ id: 0, title: "샘플", amount: 1500 }],
-  total: 1500,
+  list: [],
+  total: 0,
 };
 
 export const accountSlice = createSlice({
@@ -14,10 +14,8 @@ export const accountSlice = createSlice({
       state.total += action.payload.item.amount;
     },
     remove: (state, action) => {
-      state.list = state.list.filter(
-        (item) => item.id !== action.payload.item.id
-      );
-      state.total -= action.payload.item.amount;
+      state.total -= action.payload.amount;
+      state.list = state.list.filter((item) => item.id !== action.payload.id);
     },
     edit: (state, action) => {
       state.list = state.list.map((item) => {
@@ -31,7 +29,9 @@ export const accountSlice = createSlice({
       });
     },
     clear: (state) => {
-      state = initialState;
+      state.list = initialState.list;
+      state.total = initialState.total;
+      //   state = initialState;
     },
   },
 });

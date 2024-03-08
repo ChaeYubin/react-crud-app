@@ -3,6 +3,7 @@ import "./styles/App.css";
 import { useSelector } from "react-redux";
 import ExpenditureInput from "./component/ExpenditureInput";
 import List from "./component/List";
+import ClearButton from "./component/ClearButton";
 
 function App() {
   const [selectedId, setSelectedId] = useState(null); // 현재 선택한 항목의 아이디
@@ -16,7 +17,7 @@ function App() {
       <div className="container">
         <ExpenditureInput />
         <List list={list} />
-        <div>목록 삭제 컴포넌트</div>
+        <ClearButton />
       </div>
       <div className="footer">
         <h2>총 지출: {totalExpenditure}원</h2>

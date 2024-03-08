@@ -5,7 +5,12 @@ function List({ list }) {
   return (
     <>
       {list.map((item) => (
-        <ListItem key={item.id} title={item.title} expenditure={item.amount} />
+        <ListItem
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          expenditure={item.amount}
+        />
       ))}
     </>
   );

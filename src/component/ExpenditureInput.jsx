@@ -24,7 +24,6 @@ function ExpenditureInput() {
     }
 
     e.preventDefault();
-    console.log("submit button clicked");
     setTitleInput("");
     setExpenditureInput(0);
 
