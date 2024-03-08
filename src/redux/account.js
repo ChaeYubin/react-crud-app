@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   list: [],
   total: 0,
+  selectedItem: null,
 };
 
 export const accountSlice = createSlice({
@@ -17,6 +18,9 @@ export const accountSlice = createSlice({
       state.total -= action.payload.amount;
       state.list = state.list.filter((item) => item.id !== action.payload.id);
     },
+    selectItem: (state, action) => {
+      state.selectedItem = action.payload.item;
+    },
     edit: (state, action) => {
       state.list = state.list.map((item) => {
         if (item.id === action.payload.item.id) {
@@ -27,14 +31,14 @@ export const accountSlice = createSlice({
           return item;
         }
       });
+      state.selectedItem = null;
     },
     clear: (state) => {
       state.list = initialState.list;
       state.total = initialState.total;
-      //   state = initialState;
     },
   },
 });
 
-export const { add, remove, edit, clear } = accountSlice.actions;
+export const { add, remove, selectItem, edit, clear } = accountSlice.actions;
 export default accountSlice.reducer;

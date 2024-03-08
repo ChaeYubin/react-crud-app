@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./../styles/ExpenditureInput.css";
 import uuid from "react-uuid";
 import { useDispatch } from "react-redux";
-import { add } from "../redux/account";
+import { add, edit } from "../redux/account";
 
-function ExpenditureInput() {
+function ExpenditureInput({ selectedItem }) {
   const dispatch = useDispatch();
+
   const [titleInput, setTitleInput] = useState("");
   const [expenditureInput, setExpenditureInput] = useState(0);
+
+  useEffect(() => {
+    if (selectedItem) {
+      setTitleInput(selectedItem.title);
+      setExpenditureInput(selectedItem.amount);
+    }
+  }, [selectedItem]);
 
   const onTitleChange = (e) => {
     setTitleInput(e.target.value);
@@ -17,7 +25,7 @@ function ExpenditureInput() {
     setExpenditureInput(e.target.value);
   };
 
-  const onClick = (e) => {
+  const onClickSubmitButton = (e) => {
     if (titleInput === "" || expenditureInput === 0) {
       alert("모든 항목을 잘 입력해주세요.");
       return;
@@ -36,6 +44,23 @@ function ExpenditureInput() {
     dispatch(add({ item: newItem }));
   };
 
+  const onClickEditButton = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      edit({
+        item: {
+          id: selectedItem.id,
+          title: titleInput,
+          amount: Number(expenditureInput),
+        },
+      })
+    );
+
+    setTitleInput("");
+    setExpenditureInput(0);
+  };
+
   return (
     <div className="input-container">
       <div className="items">
@@ -52,7 +77,11 @@ function ExpenditureInput() {
           />
         </div>
       </div>
-      <button onClick={onClick}>제출</button>
+      {selectedItem == null ? (
+        <button onClick={onClickSubmitButton}>제출</button>
+      ) : (
+        <button onClick={onClickEditButton}>수정</button>
+      )}
     </div>
   );
 }
