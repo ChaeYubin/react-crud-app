@@ -1,7 +1,7 @@
 import React from "react";
 import "./../styles/ListItem.css";
 import { useDispatch } from "react-redux";
-import { remove, selectItem } from "./../redux/account";
+import { remove, selectItem, alert } from "./../redux/account";
 
 function ListItem({ id, title, expenditure }) {
   const dispatch = useDispatch();
@@ -14,6 +14,9 @@ function ListItem({ id, title, expenditure }) {
 
   const onClickDeleteButton = () => {
     dispatch(remove({ id: id, amount: expenditure }));
+    dispatch(
+      alert({ show: true, alertMsg: "아이템이 삭제되었습니다.", color: "red" })
+    );
   };
 
   return (

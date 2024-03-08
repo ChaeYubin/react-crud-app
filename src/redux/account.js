@@ -4,6 +4,7 @@ const initialState = {
   list: [],
   total: 0,
   selectedItem: null,
+  alert: { show: false, alertMsg: "", color: "" },
 };
 
 export const accountSlice = createSlice({
@@ -37,8 +38,14 @@ export const accountSlice = createSlice({
       state.list = initialState.list;
       state.total = initialState.total;
     },
+    alert: (state, action) => {
+      state.alert.show = action.payload.show;
+      state.alert.alertMsg = action.payload.alertMsg;
+      state.alert.color = action.payload.color;
+    },
   },
 });
 
-export const { add, remove, selectItem, edit, clear } = accountSlice.actions;
+export const { add, remove, selectItem, edit, clear, alert } =
+  accountSlice.actions;
 export default accountSlice.reducer;

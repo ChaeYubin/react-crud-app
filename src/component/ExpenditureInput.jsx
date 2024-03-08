@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./../styles/ExpenditureInput.css";
 import uuid from "react-uuid";
 import { useDispatch } from "react-redux";
-import { add, edit } from "../redux/account";
+import { add, alert, edit } from "../redux/account";
 
 function ExpenditureInput({ selectedItem }) {
   const dispatch = useDispatch();
@@ -42,6 +42,13 @@ function ExpenditureInput({ selectedItem }) {
     };
 
     dispatch(add({ item: newItem }));
+    dispatch(
+      alert({
+        show: true,
+        alertMsg: "아이템이 생성되었습니다.",
+        color: "green",
+      })
+    );
   };
 
   const onClickEditButton = (e) => {
@@ -54,6 +61,13 @@ function ExpenditureInput({ selectedItem }) {
           title: titleInput,
           amount: Number(expenditureInput),
         },
+      })
+    );
+    dispatch(
+      alert({
+        show: true,
+        alertMsg: "아이템이 수정되었습니다.",
+        color: "green",
       })
     );
 
