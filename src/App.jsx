@@ -2,10 +2,12 @@ import { useState } from "react";
 import "./styles/App.css";
 import { useSelector } from "react-redux";
 import ExpenditureInput from "./component/ExpenditureInput";
+import List from "./component/List";
 
 function App() {
   const [selectedId, setSelectedId] = useState(null); // 현재 선택한 항목의 아이디
   const totalExpenditure = useSelector((state) => state.account.total);
+  const list = useSelector((state) => state.account.list);
 
   return (
     <div className="App">
@@ -13,7 +15,7 @@ function App() {
       <h1>예산 계산기</h1>
       <div className="container">
         <ExpenditureInput />
-        <div>리스트 컴포넌트</div>
+        <List list={list} />
         <div>목록 삭제 컴포넌트</div>
       </div>
       <div className="footer">
