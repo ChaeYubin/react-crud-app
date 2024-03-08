@@ -10,6 +10,8 @@ function ExpenditureInput({ selectedItem }) {
   const [titleInput, setTitleInput] = useState("");
   const [expenditureInput, setExpenditureInput] = useState(0);
 
+  // 수정하려고 선택한 아이템이 있으면
+  // 선택한 아이템의 제목과 비용을 input에 가져와 보여준다.
   useEffect(() => {
     if (selectedItem) {
       setTitleInput(selectedItem.title);
@@ -27,7 +29,7 @@ function ExpenditureInput({ selectedItem }) {
 
   const onClickSubmitButton = (e) => {
     if (titleInput === "" || expenditureInput === 0) {
-      alert("모든 항목을 잘 입력해주세요.");
+      alert("모든 항목을 올바르게 입력해주세요.");
       return;
     }
 
@@ -63,6 +65,7 @@ function ExpenditureInput({ selectedItem }) {
         },
       })
     );
+
     dispatch(
       alert({
         show: true,

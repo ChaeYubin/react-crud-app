@@ -9,11 +9,12 @@ import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
+
   const totalExpenditure = useSelector((state) => state.account.total);
   const list = useSelector((state) => state.account.list);
   const selectedItem = useSelector((state) => state.account.selectedItem);
-
   const alertModal = useSelector((state) => state.account.alert);
+
   // alertModal.show 상태가 바뀌면(true가 되어 모달이 보이면) 2초 뒤 show: false로 바꾸어 모달이 보이지 않게 한다.
   useEffect(() => {
     if (alertModal.show) {
